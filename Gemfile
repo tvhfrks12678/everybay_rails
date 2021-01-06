@@ -23,6 +23,8 @@ group :development, :test do
   gem 'webdrivers'
   gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver'
+  gem "ruby-debug-ide"
+  gem "debase"
 end
 
 group :development do
