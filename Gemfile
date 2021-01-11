@@ -23,11 +23,11 @@ group :development, :test do
   gem 'webdrivers'
   gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver'
-  gem "ruby-debug-ide"
-  gem "debase"
   gem 'shoulda-matchers',
     git: 'https://github.com/thoughtbot/shoulda-matchers.git',
     branch: 'rails-5'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

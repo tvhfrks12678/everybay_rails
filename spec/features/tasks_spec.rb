@@ -7,7 +7,7 @@ RSpec.feature "Tasks", type: :feature do
       name: "RSpec tutorial",
       owner: user)
   }
-  let!(:task) { projet.tasks.create!(name: "Finish RSpec tutorial") }
+  let!(:task) { project.tasks.create!(name: "Finish RSpec tutorial") }
 
   scenario "user toggles a task", js: true do
     sign_in user
@@ -26,7 +26,7 @@ def go_to_project(name)
   click_link name
 end
 
-def complete_task(naem)
+def complete_task(name)
   check name
 end
 

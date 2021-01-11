@@ -6,11 +6,11 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user)).to be_valid
   end
 
-  it "is valid whith a first name, last name, email, and password" do
+  it "is valid with a first name, last name and email, and password" do
 
     user = User.new(
       first_name: "Aaron",
-      last_name: "Sumer",
+      last_name: "Sumner",
       email: "tester@example.com",
       password: "dottle-nouveau-pavilion-tights-furze",
     )
@@ -32,5 +32,22 @@ RSpec.describe User, type: :model do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
     expect(true).to  be_truthy
+  end
+
+  it "sends a welcome email on account creation" do
+    allow(UserMailer).to \
+      receive_message_chain(:welcome_email, :deliver_later)
+    user = FactoryBot.create(:user)
+    expect(UserMailer).to have_received(:welcome_email).with(user) 
+  end
+
+  it "performs geocoding", vcr: true do
+    user = FactoryBot.create(:user, last_sign_in_ip: "161.185.207.20")
+    expect {
+      user.geocode
+    }.to change(user, :location).
+      from(nil).
+      to("New York City, New York, US")
+      # to("Brooklyn, New York, US")
   end
 end
